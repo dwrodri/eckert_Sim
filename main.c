@@ -82,7 +82,7 @@ void dump_ram_table(){
 
 void dump_addr_rom_table(){
     puts("=========================");
-    puts("OPCODE\t|\tCTRL ADDR\t|");
+    puts("OPC\t|\tCTRL ADDR\t|");
     puts("=========================");
     for (int i = 0; i < 16; ++i) {
         printf("%3s\t\t|\t%02x\t\t\t|\n", opcode_names[i], ADDR_ROM[i]);
