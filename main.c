@@ -72,7 +72,7 @@ void dump_ram_table(){
     puts("ADDR\t|\tOPCODE\t|\tREF\t\t|\tRAW\t\t|");
     puts("=============================================");
     for (short j = 0; j < 256; ++j){
-        printf("%03x:\t|\t%3s\t\t|\t %x\t\t|\t%03x\t\t|\n", j, opcode_names[opcodes[j]], references[j], RAM[j]);
+        printf("%03x:\t|\t%3s\t\t|\t %2x\t\t|\t%03x\t\t|\n", j, opcode_names[opcodes[j]], references[j], RAM[j]);
         if(RAM[j] == 0x800) break;
     }
     puts("=============================================");
