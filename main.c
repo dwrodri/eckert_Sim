@@ -234,6 +234,7 @@ void clock_tick(){
     unsigned char map = (unsigned char)(CTRL_ROM[UR]&0x40);
     unsigned char cd = (unsigned char)(CTRL_ROM[UR]&0x80);
     unsigned short *receiver = NULL;
+    unsigned char *smaller_receiver = NULL;
 
     //get indices of flags which will be matched to enum
     unsigned char index = 0;
@@ -266,10 +267,10 @@ void clock_tick(){
                 RAM[MAR] = MDR;
                 break;
             case LP:
-                receiver = (unsigned short *) &PC;
+                smaller_receiver = &PC;
                 break;
             case LM:
-                receiver = (unsigned short *) &MAR;
+                smaller_receiver= &MAR;
                 break;
             case LD:
                 receiver = &MDR;
@@ -302,8 +303,11 @@ void clock_tick(){
 
     //perform register transfer if indicated
     if(receiver != NULL){
-        if(receiver == (unsigned short *) &PC) *receiver = (unsigned short) (BUS & 0b11111111);
-        else *receiver = BUS;
+        *receiver = BUS;
+        receiver = NULL;
+    }
+    else if(smaller_receiver){
+        *smaller_receiver = (unsigned char)BUS;
     }
 
     //adjust µ-instr counter accordingly
